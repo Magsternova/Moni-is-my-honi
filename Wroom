@@ -1,0 +1,59 @@
+#UZDEVUMS
+#1. Izveido klasi "car"
+#2. Atribūti: color, type, capacity, engine_on
+#3. Metodi: engine_start, engine_stop
+
+#KOMANDAS UZDEVUMS
+#1. Izveido klasi Passenger
+#2. Pievieno tai klasei atribūtus: name, age
+#3. Pievieno klasei Car sarakstu kur var glabāt pasažierus no klases Passenger
+#4. Izstrāda klasei Car metodi add_passenger, kas pievieno sarakstam definētam punkta 3 pasažieru
+#5. Izstrāda, tā lai katrai automašīnai var pievienot maksimum tik pasažierus, cik ir capacity
+#6. Ja mēs gribam pievienot vairāk nekā capacity, tad lai rādas informācija ka nevar vairs pievienot
+
+class Passenger:
+    def __init__(self,name : str , age:int):
+        self.name = name
+        self.age = age
+
+class car:
+    def __init__(self, color:str , type:str , capacity:int , engine_on: bool = False):
+        self.color = color
+        self.type = type
+        self.capacity = capacity
+        self.engine_on = engine_on
+        self.passengers = []
+
+    def add_passenger(self, name:Passenger):
+        passenger_count = 0
+        while True:
+            if passenger_count <= self.capacity:
+                self.passengers.append(name)
+                passenger_count += 1
+            elif passenger_count >= self.capacity:
+                print("The car is already full!")
+                break
+
+    def turn_on_language(self):
+        if self.engine_on == True:
+            print("The engine is already on, you nincompoop")
+        else:
+            self.engine_on = True
+
+    def turn_off_language(self):
+        if self.engine_on == False:
+            print("The engine is already off, it can't be turned off twice")
+        else:
+            self.engine_on = False
+
+    def description(self):
+        print(f"COLOR - {self.color}\nTYPE - {self.type}\nCAPACITY - {self.capacity}\nTHE ENGINE IS ON - {self.engine_on}")
+
+car1 = car("red", "BMW E46" , 5)
+car1.color = "rainbow"
+
+car1.turn_on_language()
+
+car1.description()
+
+car1.add_passenger("PLEB6") 
