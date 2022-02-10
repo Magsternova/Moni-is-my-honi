@@ -3,7 +3,6 @@
 #timestamp (optional)
 
 import datetime
-from turtle import settiltangle
 
 #UZDEVUMS: izveido klasi Transaction
 class Transaction:
@@ -16,18 +15,24 @@ class Account:
     auto_account_number = 1234567890
     
     def __init__(self, currency: str, initial_balance: float = 0):
-        self._account_number = Account.auto_account_number
+        self.account_number = Account.auto_account_number
         Account.auto_account_number += 1
+        self.transactions = []
         self.currency = currency
         self.initial_balance = initial_balance
         self.timestamp = datetime.datetime.now()
 
-    @property #decorators
-    def account_number(self):
-        return self._account_number
-    
-    def print_transactions():
-        pass
+    def add_money(self, transaction: Transaction):
+        self.transactions.append(transaction)
+
+    def get_money(self, transaction: Transaction):
+        self.transactions.append(transaction)
+        
+#UZDEVUMS
+#Kontam lai ir metode add_money (pievenos jaunu tranzakciju ar pozitivo summas vertibu)
+#Kontam lai ir metode get_money (pievienos jaunu tranzakciju ar negativo summas versibu)
+#Visas tranzakcijas tiek glabas konta
+
 
 class Client:
     def __init__(self, name: str):
@@ -43,6 +48,14 @@ class Client:
         for account in self.accounts:
             print(f'{account.account_number} ({account.currency} {account.initial_balance})')        
 
+#UZDEVUMS: izveido metodu klientiem, kas izdrukā visus lklienta kontus šādā formātā:
+#PIEMĒRS
+#Accounts of client Anna
+#1234567890 (EUR 200)
+#1234567891 (USD 150)
+#1234567892 (CAD 300)  
+
+
 clients = []
 clients.append(Client('Anna'))
 clients.append(Client('Jenifer'))
@@ -56,9 +69,6 @@ clients[1].add_account(Account('EUR', 800))
 clients[1].add_account(Account('JPY', 10000))
 
 clients[2].add_account(Account('EUR'))
-
-clients[0].accounts[0].account_number = '999999999999'
-
 
 for client in clients:
     client.print_accounts()
